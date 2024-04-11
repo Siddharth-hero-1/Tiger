@@ -330,7 +330,7 @@ function fun_gamepause() {
   Array.from(document.getElementsByClassName('grass')).forEach((r) => {
     r.classList.add('y')
   })
-  dino.src = '/img/over1.png';
+  dino.src = 'over1.png';
   clearInterval(scoreint);
   up_b.setAttribute('disabled', '')
   clearInterval(events_on_collide_interwal)
@@ -356,7 +356,7 @@ function fun_gameresume() {
   })
   st_game_score();
   coin_collected = false;
-  dino.src = '/img/tiger.gif';
+  dino.src = 'tiger.gif';
 
   fun_event_collision();
   coin_collected = false;
@@ -562,7 +562,7 @@ var replay = document.getElementById('replay')
 replay.addEventListener('click', () => {
 
   over.style.display = 'none';
-  dino.src = 'img/tiger.gif';
+  dino.src = 'tiger.gif';
   dino.style.filter = 'none';
   st_interface.style.display = 'flex';
 game_over=false;
