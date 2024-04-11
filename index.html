@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      user-select: none
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      height: 100vh;
+      background: #FFADAD
+    }
+
+    button {
+      color: red;
+      font-size: 25px;
+      padding: 15px 26px;
+      -webkit-text-stroke: 1px gold;
+      font-weight: bolder;
+      border-radius: 8px;
+      box-shadow: 0px 0px 5px 2px white
+    }
+
+    #game_a {
+      width: 100%;
+      background: linear-gradient(skyblue, sandybrown);
+      height: 250px;
+      position: relative;
+      overflow-x: hidden;
+      border-bottom: 5px groove sandybrown
+    }
+
+
+    .grass {
+      position: absolute;
+      bottom: 0px;
+      right: -8px;
+      animation-name: g_run;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+      animation-duration: 1s;
+    }
+
+    .g1 {
+      height: 4px;
+      width: 3px;
+      background: black;
+    }
+
+    .g2 {
+      height: 4px;
+      width: 10px;
+      background: black;
+      border-top-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      animation-delay: 1.2s;
+    }
+
+    .g3 {
+      height: 4px;
+      width: 5px;
+      background: red;
+      animation-delay: .55s
+    }
+
+    @keyframes g_run {
+      0% {
+        opacity: 1;
+        transform: translateX(0vw)
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateX(-101vw)
+      }
+    }
+
+    #dino {
+      position: absolute;
+      height: 50px;
+      bottom: 5px;
+      left: 30px;
+    }
+
+    .animate {
+      animation: jump .5s linear forwards;
+    }
+
+    @keyframes jump {
+      0% {
+        bottom: 5px
+      }
+
+      10% {
+        bottom: 90px;
+      }
+
+      70% {
+        bottom: 90px;
+      }
+
+      100% {
+        bottom: 5px;
+      }
+    }
+
+
+    .cactus {
+      height: 40px;
+      position: absolute;
+      bottom: 5px;
+      right: 0px;
+      opacity: 0;
+      animation: g_run 1s 1 linear;
+      animation-delay: 1s;
+      display: none;
+    }
+
+    #up_p {
+      position: absolute;
+      top: 8px;
+      padding: 20px 26px;
+      position: absolute;
+    }
+
+    #up_b {
+      position: absolute;
+      bottom: 127px;
+      left: 35%;
+      font-size: 28px
+    }
+
+    #e {
+      position: absolute;
+      top: 7px
+    }
+
+    #score,
+    #h_score {
+      position: absolute;
+      top: 67px;
+      left: 15px;
+      text-shadow: 0px 0px 4px red;
+      color: blue;
+      font-size: 20px;
+      font-family: cursive;
+      font-weight: bolder;
+    }
+
+    #over #score,
+    #over #h_score {
+      top: 40%;
+    }
+
+    #h_score {
+      right: 15px;
+      left: auto;
+    }
+
+    .high {
+      animation: glow 1s infinite;
+    }
+
+    @keyframes glow {
+      0% {
+        color: red;
+        text-shadow: 0px 0px 4px #2200FF, 0px 0px 8px #4632CC;
+        transform: scale(1.1);
+      }
+
+      100% {
+        color: yellow;
+        text-shadow: 0px 0px 4px #2200FF, 0px 0px 8px #4632CC;
+        transform: scale(1.1);
+      }
+    }
+
+    #over {
+      display: none;
+      position: absolute;
+      width: 98%;
+      justify-content: space-around;
+      align-items: center;
+      color: red;
+      background: #000000;
+      top: 20%;
+      left: 1%;
+      z-index: 9;
+      border-radius: 8px;
+      font-size: 30px;
+      flex-direction: column;
+      height: 38vh
+    }
+
+    #st {
+      background: #000000;
+      color: red;
+      display: flex;
+      text-align: center;
+      font-size: 20px;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      position: absolute;
+      top: calc(50% - 20vh);
+      left: 1%;
+      width: 98%;
+      z-index: 8;
+      border-radius: 8px;
+      height: 28vh
+    }
+
+    #st button {
+      padding: 15px 15px;
+    }
+
+    h4 {
+      font-size: 40px;
+      -webkit-text-stroke: 1px red;
+      color: transparent;
+      font-family: 'Times New Roman', Times, serif;
+      font-weight: normal
+    }
+
+    #pause {
+      font-size: 40px;
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+    }
+
+    audio {
+      display: none
+    }
+
+    .coin {
+      height: 35px;
+      position: absolute;
+      right: 0px;
+      opacity: 0;
+      display: none;
+      animation: g_run 1s 1 linear;
+    }
+
+    #co1 {
+      bottom: 58px;
+      animation-delay: 1.8s;
+    }
+
+    #co2 {
+      bottom: 6px;
+      animation-delay: 4s;
+    }
+
+    #co3 {
+      bottom: 100px;
+      animation-delay: 1s;
+    }
+
+    #co4 {
+      bottom: 120px;
+      animation-delay: 2.7s;
+    }
+
+    #coin_count {
+      box-shadow: inset 0px 0px 4px gold, inset 0px 0px 4px black;
+      display: flex;
+      left: 5px;
+      padding: 0px 2px;
+      top: 5px;
+      position: absolute
+    }
+
+    #coin_count img {
+      height: 30px;
+    }
+
+    #coin_count_num {
+      width: 60px;
+      border-left: 2px solid gold;
+      height: 30px;
+      font-size: 26px;
+      color: gold;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    #total_coins {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      box-shadow: inset 0px 0px 4px gold, inset 0px 0px 4px black;
+      padding: 0px 3px;
+      display: flex;
+      height: 30px;
+      font-size: 26px;
+      color: gold;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    #total_c_num {
+      width: 60px;
+      text-align: center;
+
+    }
+
+#revive{
+  display: none;
+  position: absolute;
+  height: 30vh;
+  background: #00000075;
+  font-size: 24px;
+  width: 98%;
+  color: red;
+  text-shadow: 0px 0px 4px red, 2px 2px 0px white;
+  top: calc(50% - 15vh);
+  left: 1%;
+  border-radius: 8px;
+}
+#revive p{
+  text-align: center;
+  line-height: 48px
+}
+#no_revive{
+  position: absolute;
+  left: 15px;
+  bottom: 30px
+}
+#revive span{
+  color: white;
+}
+#yes_revive{
+  position: absolute;
+  right: 15px;
+    bottom: 30px;
+
+} 
+    .y {
+      animation-play-state: paused
+    }
+    
+     .pause_display{
+       background: #0000004F;
+       position: absolute;
+       height: 200px;
+       display: none;
+       flex-direction: column;
+       justify-content: space-evenly;
+       align-items: center;
+       width: 96%;
+       left: 2%;
+       border-radius: 19px
+     }
+  </style>
+</head>
+
+<body>
+
+
+  <div id="st">
+    <p>__Welcome to #RUN TIGER# game__ </p>
+    <p>--Click "jump button" to jump </p>
+    <p>--Avoid collision between tiger and cactus</p>
+    <button id="st_but">Start game</button>
+  </div>
+
+  <div id="score">
+    Your Score: <span id="sc_nu">0</span>
+  </div>
+  <div id="h_score">
+    High Score: <span id="hsc_nu">0</span>
+  </div>
+  <div id="coin_count">
+    <img src="img/coin2.gif" alt="">
+    <img src="img/coin1.gif" alt="">
+    <span id="coin_count_num">0</span>
+  </div>
+  <div id="total_coins">
+    Total coins: <span id="total_c_num">0</span>
+  </div>
+  <div id="game_a">
+
+    <div class="grass g1"></div>
+    <div class="grass g2"></div>
+    <div class="grass g3"></div>
+
+
+    <img src="img/tiger.gif" id="dino" class="">
+
+
+    <img src="img/c2.png" class="cactus" id="c1">
+    <img src="img/c3.png" id="c2" class="cactus">
+    <img src="img/c1.png" id="c0" class="cactus">
+
+    <img src="img/coin2.gif" alt="" id="co1" class="coin">
+    <img src="img/coin1.gif" alt="" id="co2" class="coin">
+    <img src="img/coin2.gif" alt="" id="co3" class="coin">
+    <img src="img/coin1.gif" alt="" id="co4" class="coin">
+
+
+
+  </div>
+
+
+  <button id="up_b" disabled>Jump</button>
+
+  <button id="pause" disabled>⏸️</button>
+<div class="pause_display">
+  <p>Your game has paused..</p>
+</div>
+
+<div id="revive">
+  <p>Want to continue the game </p>
+   <p>Pay <span id="revive_coin"></span> coins</p>
+   <button id="yes_revive">Yes</button>
+      <button id="no_revive">No</button>
+
+</div>
+
+
+
+
+
+  <div id="over">
+    <h4>Game over</h4>
+    <! a href=""> <button id="replay">Replay</button><!/a>
+  </div>
+
+
+  <audio src="/img/2.wav" id="cv"></audio>
+  <audio src="/img/1.mp3" id="up_sound"></audio>
+    <audio src="/img/coin.wav" id="coin_sound"></audio>
+
+
+</body>
+<script src="script.js"></script>
+
+</html>
